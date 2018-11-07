@@ -6,6 +6,7 @@ import AddAuthorCard from "./AddAuthorCard";
 import AuthorCard from "./AuthorCard";
 import SearchBar from "./SearchBar";
 import Loading from "./Loading";
+import * as actionCreators from "./store/actions/authentication";
 
 class AuthorsList extends Component {
   render() {
@@ -23,7 +24,7 @@ class AuthorsList extends Component {
           <h3>Authors</h3>
           <SearchBar />
           <div className="row">
-            <AddAuthorCard /> {authorCards}
+            {this.props.user ? <AddAuthorCard /> : null} {authorCards}
           </div>
         </div>
       );
@@ -34,7 +35,8 @@ class AuthorsList extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.rootAuthors.loading,
-    filteredAuthors: state.rootAuthors.filteredAuthors
+    filteredAuthors: state.rootAuthors.filteredAuthors,
+    user: state.rootAuth.user
   };
 };
 
